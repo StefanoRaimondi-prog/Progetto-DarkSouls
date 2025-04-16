@@ -1,4 +1,4 @@
-from Player import Giocatore
+from Player import Giocatore, NPC
 
 
 def scegli_classe():
@@ -22,6 +22,36 @@ def scegli_classe():
     else:
         print("Scelta non valida.")
         return scegli_classe()
+
+
+def area_tranquilla():
+    npc1 = NPC("Maestro Alaric", [
+        "Hai molto da imparare, giovane guerriero...",
+        "Ogni scelta che fai ti cambia."
+    ])
+
+    npc2 = NPC("Mercante Lyra", [
+        "Non ho nulla da vendere oggi...",
+        "Ma forse domani tornerai con più fortuna."
+    ])
+
+    while True:
+        print("\n=== Area Tranquilla ===")
+        print("1) Parla con Maestro Alaric")
+        print("2) Parla con Mercante Lyra")
+        print("3) Esci e affronta il prossimo nemico")
+
+        scelta = input("Cosa vuoi fare? ")
+
+        if scelta == "1":
+            npc1.parla()
+        elif scelta == "2":
+            npc2.parla()
+        elif scelta == "3":
+            print("Ti incammini verso la prossima battaglia...")
+            break
+        else:
+            print("Scelta non valida.")
 
 
 def combatti(giocatore, nemico):
