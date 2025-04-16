@@ -33,13 +33,22 @@ def area_tranquilla():
     npc2 = NPC("Mercante Lyra", [
         "Non ho nulla da vendere oggi...",
         "Ma forse domani tornerai con più fortuna."
+    
+    ])
+    
+    npc3 = NPC("Guerriero Errante", [
+        "La battaglia è la mia vita.",
+        "Torna quando sarai un gerriero vero."
+    
+   
     ])
 
     while True:
         print("\n=== Area Tranquilla ===")
         print("1) Parla con Maestro Alaric")
         print("2) Parla con Mercante Lyra")
-        print("3) Esci e affronta il prossimo nemico")
+        print("3) Parla con Guerriero Errante")
+        print("4) Esci e affronta il prossimo nemico")
 
         scelta = input("Cosa vuoi fare? ")
 
@@ -48,6 +57,9 @@ def area_tranquilla():
         elif scelta == "2":
             npc2.parla()
         elif scelta == "3":
+            npc3.parla()
+            
+        elif scelta == "4":
             print("Ti incammini verso la prossima battaglia...")
             break
         else:
