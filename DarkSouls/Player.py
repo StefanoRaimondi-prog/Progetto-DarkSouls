@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
 import time
+import enemy 
 
 class Personaggio(ABC):
     def __init__(self, nome, salute, stamina):
         self.nome = nome
         self.salute = salute
         self.stamina = stamina
+        
 
     @abstractmethod
     def attacca(self, nemico):
@@ -21,13 +23,14 @@ class Giocatore(Personaggio):
         super().__init__(nome, salute, stamina)
         self.attacco_base = attacco
         self.difesa = difesa
+        self.numeroNemici = 0
 
     def attacco_leggero(self, nemico):
         if self.stamina >= 5:
             danno = self.attacco_base
             self.stamina -= 5
             print(f"{self.nome} esegue un attacco leggero contro {nemico.nome}")
-            nemico.ricevi_danno(danno)
+            nemico.enemy_ricevi_danno(danno)
         else:
             print(f"{self.nome} non ha abbastanza stamina per un attacco leggero!")
 
@@ -36,7 +39,7 @@ class Giocatore(Personaggio):
             danno = self.attacco_base * 1.5
             self.stamina -= 10
             print(f"{self.nome} esegue un attacco pesante contro {nemico.nome}")
-            nemico.ricevi_danno(int(danno))
+            nemico.enemy_ricevi_danno(int(danno))
         else:
             print(f"{self.nome} non ha abbastanza stamina per un attacco pesante!")
 

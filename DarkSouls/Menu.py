@@ -1,13 +1,13 @@
 from Player import Giocatore, NPC
-
+import random
 
 def scegli_classe():
     classi = {
-        "1": ("Cavaliere", 120, 80, 8, 15),
-        "2": ("Ladro", 100, 120, 10, 5),
-        "3": ("Mago", 80, 90, 18, 3),
-        "4": ("Barbaro", 110, 110, 20, 2),
-        "5": ("Paladino", 110, 100, 12, 10)
+    "1": ("Cavaliere", 450, 90, 40, 30),     # Il tank definitivo
+    "2": ("Ladro", 300, 160, 30, 12),        # Velocità pura, ma più robusto ora
+    "3": ("Mago", 280, 130, 60, 10),         # Sempre fragile, ma sopravvive a 2 colpi boss
+    "4": ("Barbaro", 400, 120, 55, 18),      # Tanta vita e tanti schiaffi
+    "5": ("Paladino", 420, 110, 38, 35)      # Resistenza top, equilibrato e tenace
     }
 
     print("Scegli la tua classe:")
@@ -65,11 +65,15 @@ def area_tranquilla():
 def combatti(giocatore, nemico):
     while giocatore.salute > 0 and nemico.salute > 0:
         print(f"\n[HUD] {giocatore.nome} - Salute: {giocatore.salute} | Stamina: {giocatore.stamina}")
+        print(f"\n[Nemico] {nemico.nome} - Salute: {nemico.salute}")
         azione = input("Vuoi attaccare (a) o scappare (s)? ").lower()
         if azione == "a":
             giocatore.attacca(nemico)
             if nemico.salute > 0:
-                nemico.attacca(giocatore)
+                if random.randint(1,2) == 1:
+                    nemico.enemyAttaccoLeggero(giocatore)
+                else:
+                    nemico.enemyAttaccoPesante(giocatore)
         elif azione == "s":
             print(f"{giocatore.nome} è scappato!")
             break
