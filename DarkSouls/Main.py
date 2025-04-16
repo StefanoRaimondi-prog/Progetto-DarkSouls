@@ -39,7 +39,7 @@ def main():
         time.sleep(1)
         if giocatore.numeroNemici % 3 == 0 and giocatore.numeroNemici > 0: #ogni 3 nemici sconfitti
             nemico = EnemyBoss()
-            print("Incontri il boss")
+            print("Incontri il boss...")
         else:
             nemico =  EnemyMedio() if random.randint(1,2) == 1 else EnemyBase() 
         combatti(giocatore, nemico)
