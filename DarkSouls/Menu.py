@@ -66,7 +66,7 @@ def combatti(giocatore, nemico):
     while giocatore.salute > 0 and nemico.salute > 0:
         print(f"\n[HUD] {giocatore.nome} - Salute: {giocatore.salute} | Stamina: {giocatore.stamina}")
         print(f"\n[Nemico] {nemico.nome} - Salute: {nemico.salute}")
-        azione = input("Vuoi attaccare (a) o scappare (s)? ").lower()
+        azione = input("\nVuoi attaccare (a) o scappare (s)? ").lower()
         if azione == "a":
             giocatore.attacca(nemico)
             if nemico.salute > 0:
@@ -75,6 +75,7 @@ def combatti(giocatore, nemico):
                 else:
                     nemico.enemyAttaccoPesante(giocatore)
             else:
+                print("Hai ucciso il nemico")
                 giocatore.numeroNemici +=1
                 giocatore.salute = giocatore.salute_max
                 giocatore.stamina = giocatore.stamina_max

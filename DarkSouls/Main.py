@@ -37,7 +37,6 @@ def main():
         # Combattimento reale con un nemico scelto casualmente
         print("\nStai per affrontare un nemico...")
         time.sleep(1)
-        print(giocatore.numeroNemici)
         if giocatore.numeroNemici % 3 == 0 and giocatore.numeroNemici > 0: #ogni 3 nemici sconfitti
             nemico = EnemyBoss()
             print("Incontri il boss")
@@ -49,7 +48,7 @@ def main():
             print("\nSei stato sconfitto. La tua avventura finisce qui...")
             break
         else:
-            input("Hai vinto! Premi invio per tornare all'area tranquilla...")
+            input("Premi invio per tornare all'area tranquilla...")
             
 
 

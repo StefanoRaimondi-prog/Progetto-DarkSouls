@@ -47,6 +47,7 @@ class Giocatore(Personaggio):
 
     def attacca(self, nemico):
         scelta = input("Scegli tipo di attacco - leggero (l) o pesante (p): ").lower()
+        print("")#print di puliza
         if scelta == "l":
             self.attacco_leggero(nemico)
         elif scelta == "p":

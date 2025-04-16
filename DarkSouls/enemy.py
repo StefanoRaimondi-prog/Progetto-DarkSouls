@@ -26,7 +26,7 @@ class Enemy(ABC):
 
 # Classe EnemyBase
 class EnemyBase(Enemy):
-    def __init__(self, nome = "goblin", salute = 60, stamina = 100):
+    def __init__(self, nome = "goblin", salute = 80, stamina = 50):
         super().__init__(nome, salute, stamina)
 
     def enemyAttaccoLeggero(self,player):
@@ -84,7 +84,7 @@ class EnemyMedio(Enemy):
 
 # Classe EnemyBoss
 class EnemyBoss(Enemy):
-    def __init__(self, nome = "Mirko Re di python", salute = 300, stamina = 200 , resistenza = 1):
+    def __init__(self, nome = "Mirko Re di OPP", salute = 300, stamina = 200 , resistenza = 1):
         super().__init__(nome, salute, stamina)
         self.resistenza = resistenza  
 
