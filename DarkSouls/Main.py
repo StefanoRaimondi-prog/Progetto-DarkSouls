@@ -1,4 +1,5 @@
-from Player import NPC, Nemico
+from Player import NPC
+from Enemy import EnemyBase, EnemyMedio, EnemyBoss
 from Menu import scegli_classe, combatti, area_tranquilla
 import time
 
@@ -32,9 +33,18 @@ def main():
         ])
         npc.parla()
 
-        # Combattimento placeholder (nemici gestiti in seguito)
-        print("\n(Nessun nemico reale disponibile - il sistema sarà integrato in seguito.)")
-        input("Premi invio per tornare all'area tranquilla...")
+        # Combattimento reale con un nemico scelto casualmente
+        print("\nStai per affrontare un nemico...")
+        time.sleep(1)
+
+        nemico = EnemyMedio()  # Puoi sostituire con EnemyBase() o EnemyBoss()
+        combatti(giocatore, nemico)
+
+        if giocatore.salute <= 0:
+            print("\nSei stato sconfitto. La tua avventura finisce qui...")
+            break
+        else:
+            input("Hai vinto! Premi invio per tornare all'area tranquilla...")
 
 
 if __name__ == "__main__":
