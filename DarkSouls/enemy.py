@@ -21,8 +21,6 @@ class Enemy(ABC):
     def enemy_ricevi_danno(self, danno):
         pass
 
-    def reset_stamina(self):
-        self.stamina = 100
 
 
 # Classe EnemyBase
