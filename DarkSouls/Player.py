@@ -21,10 +21,32 @@ class Giocatore(Personaggio):
         self.attacco_base = attacco
         self.difesa = difesa
 
+    def attacco_leggero(self, nemico):
+        if self.stamina >= 5:
+            danno = self.attacco_base
+            self.stamina -= 5
+            print(f"{self.nome} esegue un attacco leggero contro {nemico.nome}")
+            nemico.ricevi_danno(danno)
+        else:
+            print(f"{self.nome} non ha abbastanza stamina per un attacco leggero!")
+
+    def attacco_pesante(self, nemico):
+        if self.stamina >= 10:
+            danno = self.attacco_base * 1.5
+            self.stamina -= 10
+            print(f"{self.nome} esegue un attacco pesante contro {nemico.nome}")
+            nemico.ricevi_danno(int(danno))
+        else:
+            print(f"{self.nome} non ha abbastanza stamina per un attacco pesante!")
+
     def attacca(self, nemico):
-        print(f"{self.nome} attacca {nemico.nome}")
-        danno = self.attacco_base
-        nemico.ricevi_danno(danno)
+        scelta = input("Scegli tipo di attacco - leggero (l) o pesante (p): ").lower()
+        if scelta == "l":
+            self.attacco_leggero(nemico)
+        elif scelta == "p":
+            self.attacco_pesante(nemico)
+        else:
+            print("Tipo di attacco non valido. Turno sprecato!")
 
     def ricevi_danno(self, danno):
         danno_effettivo = max(danno - self.difesa, 0)
