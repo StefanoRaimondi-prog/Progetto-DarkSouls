@@ -3,7 +3,7 @@ import random
 
 def scegli_classe():
     classi = {
-    "1": ("Cavaliere", 450, 90, 40, 30),     # Il tank definitivo
+    "1": ("Cavaliere", 450, 90, 500, 30),     # Il tank definitivo
     "2": ("Ladro", 300, 160, 30, 12),        # Velocità pura, ma più robusto ora
     "3": ("Mago", 280, 130, 60, 10),         # Sempre fragile, ma sopravvive a 2 colpi boss
     "4": ("Barbaro", 400, 120, 55, 18),      # Tanta vita e tanti schiaffi

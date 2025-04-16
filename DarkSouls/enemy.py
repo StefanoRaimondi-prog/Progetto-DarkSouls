@@ -7,6 +7,7 @@ class Enemy(ABC):
         self.nome = nome
         self.salute = salute
         self.stamina = stamina
+        self.isBoss = False
 
     @abstractmethod
     def enemyAttaccoLeggero(self):
@@ -47,7 +48,7 @@ class EnemyBase(Enemy):
             self.salute -= danno
             print(f"Attacco riuscito , il nemico ha ancora {self.salute} punti vita")
         else: 
-            print(f"{self.nome} ti ha mancato")
+            print(f"Hai mancato il nemico {self.nome}")
 
 # Classe EnemyMedio
 class EnemyMedio(Enemy):
@@ -62,7 +63,7 @@ class EnemyMedio(Enemy):
             player.salute -= danno
         else: 
             self.reset_stamina()
-            print(f"{self.nome} ti ha mancato")
+            print(f"Hai mancato il nemico {self.nome}")
 
     def enemyAttaccoPesante(self,player):
         if random.random() > 0.2 and self.stamina >= 15:
@@ -79,14 +80,15 @@ class EnemyMedio(Enemy):
             self.salute -= danno
             print(f"Attacco riuscito , il nemico ha ancora {self.salute} punti vita")
         else: 
-            print(f"{self.nome} ti ha mancato")
+            print(f"Hai mancato il nemico {self.nome}")
 
 
 # Classe EnemyBoss
 class EnemyBoss(Enemy):
-    def __init__(self, nome = "Mirko Re di OPP", salute = 300, stamina = 200 , resistenza = 1):
+    def __init__(self, nome = "Mirko Re di OPP", salute = 250, stamina = 200 , resistenza = 50):
         super().__init__(nome, salute, stamina)
         self.resistenza = resistenza  
+        self.isBoss = True
 
     def enemyAttaccoLeggero(self,player):
         if random.random() > 0.3 and self.stamina >= 10:
@@ -109,12 +111,11 @@ class EnemyBoss(Enemy):
             print(f"{self.nome} ti ha mancato")
 
     def enemy_ricevi_danno(self, danno):
-        # La resistenza riduce il danno come una percentuale
-        danno_effettivo = danno * (1 - self.resistenza)
+        danno_effettivo = danno - self.resistenza
         if random.random() > 0.2:
             self.salute -= danno_effettivo
             print(f"Attacco riuscito , il nemico ha ancora {self.salute} punti vita")
         else: 
-            print(f"{self.nome} ti ha mancato")
+            print(f"Hai mancato il nemico {self.nome}")
             
 

@@ -10,7 +10,7 @@ def intro_narrativa():
         "...Il fuoco si spegne lentamente...",
         "Un'epoca oscura si avvicina...",
         "Solo il Non Morto prescelto può invertire il destino...",
-        "Che sia tu?"
+        "Che sia tu?",
         "O solo un altro rigurgito di follia...",
     ]
     for frase in scene:
@@ -50,7 +50,11 @@ def main():
             break
         else:
             input("Premi invio per tornare all'area tranquilla...")
-            
+        if nemico.isBoss and nemico.salute <= 0:
+            print("----\nComlimenti hai ottenuto il ricettacolo della conoscenza proibita...")
+            print("Si distinguono alcune rune... OOP")
+            print("Le rune brillano... \n Un sussuro ti chiede:  \n Riuscira a trovare il Lord?")
+            break
 
 
 if __name__ == "__main__":
