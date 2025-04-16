@@ -27,7 +27,7 @@ def main():
         area_tranquilla()
 
         # Dialogo iniziale
-        npc = NPC("Vecchio Saggio", [
+        npc = NPC("Vergine Misteriosa", [
             "Benvenuto, guerriero.",
             "Solo i forti sopravvivono.",
             "Buona fortuna."
