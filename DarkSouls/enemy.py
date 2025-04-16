@@ -20,6 +20,9 @@ class Enemy(ABC):
     def enemy_ricevi_danno(self, danno):
         pass
 
+    def reset_stamina(self):
+        self.stamina = 100
+
 
 # Classe EnemyBase
 class EnemyBase(Enemy):
@@ -27,11 +30,13 @@ class EnemyBase(Enemy):
         super().__init__(nome, salute, stamina)
 
     def enemyAttaccoLeggero(self):
-        if random.random() > 0.1:
+        if random.random() > 0.1 and self.stamina >= 10:
             danno = random.randint(30,50)
             print(f"{self.nome} ti ha colpito hai perso {danno} punti vita")
+            self.stamina -= 10
             return danno
         else: 
+            self.reset_stamina()
             print("Attacco fallito")
     
     def enemy_ricevi_danno(self,danno):
@@ -47,19 +52,23 @@ class EnemyMedio(Enemy):
         super().__init__(nome, salute, stamina)
 
     def enemyAttaccoLeggero(self):
-        if random.random() > 0.05:
+        if random.random() > 0.05 and self.stamina >= 10:
             danno = random.randint(50,80)
             print(f"{self.nome} ti ha colpito hai perso {danno} punti vita")
+            self.stamina -= 10
             return danno
         else: 
+            self.reset_stamina()
             print("Attacco fallito")
 
     def enemyAttaccoPesante(self):
-        if random.random() > 0.2:
+        if random.random() > 0.2 and self.stamina >= 15:
             danno = random.randint(90,110)
             print(f"{self.nome} ti ha colpito hai perso {danno} punti vita")
+            self.stamina -= 15
             return danno
         else: 
+            self.reset_stamina()
             print("Attacco fallito")
 
     def enemy_ricevi_danno(self, danno):
@@ -77,19 +86,23 @@ class EnemyBoss(Enemy):
         self.resistenza = resistenza  
 
     def enemyAttaccoLeggero(self):
-        if random.random() > 0.3:
+        if random.random() > 0.3 and self.stamina >= 10:
             danno = random.randint(100,110)
             print(f"{self.nome} ti ha colpito hai perso {danno} punti vita")
+            self.stamina -= 10
             return danno
         else: 
+            self.reset_stamina()
             return 0
 
     def enemyAttaccoPesante(self):
-        if random.random() > 0.5:
+        if random.random() > 0.5 and self.stamina >= 15:
             danno = random.randint(120,130)
             print(f"{self.nome} ti ha colpito hai perso {danno} punti vita")
+            self.stamina -= 15
             return danno
         else: 
+            self.reset_stamina()
             print(f"Attacco fallito")
 
     def enemy_ricevi_danno(self, danno):
