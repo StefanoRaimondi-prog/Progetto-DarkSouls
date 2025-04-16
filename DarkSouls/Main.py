@@ -1,5 +1,5 @@
 from Player import NPC
-from enemy import EnemyBase, EnemyMedio, EnemyBoss
+from Enemy import EnemyBase, EnemyMedio, EnemyBoss
 from Menu import scegli_classe, combatti, area_tranquilla
 import time
 import random

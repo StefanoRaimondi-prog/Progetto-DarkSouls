@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import time
-import enemy 
+import Enemy 
 
 class Personaggio(ABC):
     def __init__(self, nome, salute, stamina):
