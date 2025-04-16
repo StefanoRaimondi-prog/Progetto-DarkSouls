@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import time
 
 class Personaggio(ABC):
     def __init__(self, nome, salute, stamina):
@@ -54,7 +55,6 @@ class Giocatore(Personaggio):
         print(f"{self.nome} ha ricevuto {danno_effettivo} danni. Salute rimasta: {self.salute}")
 
 
-
 class NPC:
     def __init__(self, nome, dialoghi):
         self.nome = nome
@@ -63,3 +63,19 @@ class NPC:
     def parla(self):
         for linea in self.dialoghi:
             input(f"{self.nome}: {linea} (premi invio)")
+            time.sleep(1)
+
+
+# Classe placeholder per Nemico (verrà gestita da un compagno)
+class Nemico(Personaggio):
+    def __init__(self, nome, salute, stamina, attacco):
+        super().__init__(nome, salute, stamina)
+        self.attacco_base = attacco
+
+    def attacca(self, nemico):
+        print(f"{self.nome} attacca {nemico.nome}")
+        nemico.ricevi_danno(self.attacco_base)
+
+    def ricevi_danno(self, danno):
+        self.salute -= danno
+        print(f"{self.nome} ha subito {danno} danni. Salute rimanente: {self.salute}")

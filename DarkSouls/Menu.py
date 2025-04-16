@@ -1,80 +1,81 @@
-from Player import Giocatore, NPC
+from abc import ABC, abstractmethod
+import time
+
+class Personaggio(ABC):
+    def __init__(self, nome, salute, stamina):
+        self.nome = nome
+        self.salute = salute
+        self.stamina = stamina
+
+    @abstractmethod
+    def attacca(self, nemico):
+        pass
+
+    @abstractmethod
+    def ricevi_danno(self, danno):
+        pass
 
 
-def scegli_classe():
-    classi = {
-        "1": ("Cavaliere", 120, 80, 8, 15),
-        "2": ("Ladro", 100, 120, 10, 5),
-        "3": ("Mago", 80, 90, 18, 3),
-        "4": ("Barbaro", 110, 110, 20, 2),
-        "5": ("Paladino", 110, 100, 12, 10)
-    }
+class Giocatore(Personaggio):
+    def __init__(self, nome, salute, stamina, attacco, difesa):
+        super().__init__(nome, salute, stamina)
+        self.attacco_base = attacco
+        self.difesa = difesa
 
-    print("Scegli la tua classe:")
-    for chiave, dati in classi.items():
-        nome, salute, stamina, attacco, difesa = dati
-        print(f"{chiave}) {nome} - Attacco: {attacco}, Difesa: {difesa}, Stamina: {stamina}, Salute: {salute}")
-
-    scelta = input("Inserisci il numero della classe: ")
-    if scelta in classi:
-        nome, salute, stamina, attacco, difesa = classi[scelta]
-        return Giocatore(nome, salute, stamina, attacco, difesa)
-    else:
-        print("Scelta non valida.")
-        return scegli_classe()
-
-
-def area_tranquilla():
-    npc1 = NPC("Maestro Alaric", [
-        "Hai molto da imparare, giovane guerriero...",
-        "Ogni scelta che fai ti cambia."
-    ])
-
-    npc2 = NPC("Mercante Lyra", [
-        "Non ho nulla da vendere oggi...",
-        "Ma forse domani tornerai con più fortuna."
-    
-    ])
-    
-    npc3 = NPC("Guerriero Errante", [
-        "La battaglia è la mia vita.",
-        "Torna quando sarai un gerriero vero."
-    
-   
-    ])
-
-    while True:
-        print("\n=== Area Tranquilla ===")
-        print("1) Parla con Maestro Alaric")
-        print("2) Parla con Mercante Lyra")
-        print("3) Parla con Guerriero Errante")
-        print("4) Esci e affronta il prossimo nemico")
-
-        scelta = input("Cosa vuoi fare? ")
-
-        if scelta == "1":
-            npc1.parla()
-        elif scelta == "2":
-            npc2.parla()
-        elif scelta == "3":
-            npc3.parla()
-            
-        elif scelta == "4":
-            print("Ti incammini verso la prossima battaglia...")
-            break
+    def attacco_leggero(self, nemico):
+        if self.stamina >= 5:
+            danno = self.attacco_base
+            self.stamina -= 5
+            print(f"{self.nome} esegue un attacco leggero contro {nemico.nome}")
+            nemico.ricevi_danno(danno)
         else:
-            print("Scelta non valida.")
+            print(f"{self.nome} non ha abbastanza stamina per un attacco leggero!")
 
-
-def combatti(giocatore, nemico):
-    while giocatore.salute > 0 and nemico.salute > 0:
-        azione = input("Vuoi attaccare (a) o scappare (s)? ").lower()
-        if azione == "a":
-            giocatore.attacca(nemico)
-            if nemico.salute > 0:
-                nemico.attacca(giocatore)
-        elif azione == "s":
-            print(f"{giocatore.nome} è scappato!")
-            break
+    def attacco_pesante(self, nemico):
+        if self.stamina >= 10:
+            danno = self.attacco_base * 1.5
+            self.stamina -= 10
+            print(f"{self.nome} esegue un attacco pesante contro {nemico.nome}")
+            nemico.ricevi_danno(int(danno))
         else:
-            print("Azione non valida.")
+            print(f"{self.nome} non ha abbastanza stamina per un attacco pesante!")
+
+    def attacca(self, nemico):
+        scelta = input("Scegli tipo di attacco - leggero (l) o pesante (p): ").lower()
+        if scelta == "l":
+            self.attacco_leggero(nemico)
+        elif scelta == "p":
+            self.attacco_pesante(nemico)
+        else:
+            print("Tipo di attacco non valido. Turno sprecato!")
+
+    def ricevi_danno(self, danno):
+        danno_effettivo = max(danno - self.difesa, 0)
+        self.salute -= danno_effettivo
+        print(f"{self.nome} ha ricevuto {danno_effettivo} danni. Salute rimasta: {self.salute}")
+
+
+class NPC:
+    def __init__(self, nome, dialoghi):
+        self.nome = nome
+        self.dialoghi = dialoghi
+
+    def parla(self):
+        for linea in self.dialoghi:
+            input(f"{self.nome}: {linea} (premi invio)")
+            time.sleep(1)
+
+
+# Classe placeholder per Nemico (verrà gestita da un compagno)
+class Nemico(Personaggio):
+    def __init__(self, nome, salute, stamina, attacco):
+        super().__init__(nome, salute, stamina)
+        self.attacco_base = attacco
+
+    def attacca(self, nemico):
+        print(f"{self.nome} attacca {nemico.nome}")
+        nemico.ricevi_danno(self.attacco_base)
+
+    def ricevi_danno(self, danno):
+        self.salute -= danno
+        print(f"{self.nome} ha subito {danno} danni. Salute rimanente: {self.salute}")
