@@ -74,6 +74,10 @@ def combatti(giocatore, nemico):
                     nemico.enemyAttaccoLeggero(giocatore)
                 else:
                     nemico.enemyAttaccoPesante(giocatore)
+            else:
+                giocatore.numeroNemici +=1
+                giocatore.salute = giocatore.salute_max
+                giocatore.stamina = giocatore.stamina_max
         elif azione == "s":
             print(f"{giocatore.nome} è scappato!")
             break
