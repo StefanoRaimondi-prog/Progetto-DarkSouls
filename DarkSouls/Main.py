@@ -9,8 +9,9 @@ def intro_narrativa():
     scene = [
         "...Il fuoco si spegne lentamente...",
         "Un'epoca oscura si avvicina...",
-        "Solo pochi prescelti possono invertire il destino...",
-        "Tu sei uno di loro."
+        "Solo il Non Morto prescelto può invertire il destino...",
+        "Che sia tu?"
+        "O solo un altro rigurgito di follia...",
     ]
     for frase in scene:
         print(frase)
@@ -45,7 +46,7 @@ def main():
         combatti(giocatore, nemico)
 
         if giocatore.salute <= 0:
-            print("\nSei stato sconfitto. La tua avventura finisce qui...")
+            print("\nSEI MORTO!")
             break
         else:
             input("Premi invio per tornare all'area tranquilla...")
