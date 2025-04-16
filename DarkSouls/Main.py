@@ -50,7 +50,8 @@ def main():
             break
         else:
             giocatore.numeroNemici +=1
-            giocatore.salute += 100
+            giocatore.salute = giocatore.salute_max
+            giocatore.stamina = giocatore.stamina_max
             input("Hai vinto! Premi invio per tornare all'area tranquilla...")
             
 

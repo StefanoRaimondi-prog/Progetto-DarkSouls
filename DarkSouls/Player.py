@@ -24,6 +24,8 @@ class Giocatore(Personaggio):
         self.attacco_base = attacco
         self.difesa = difesa
         self.numeroNemici = 0
+        self.salute_max = salute
+        self.stamina_max = stamina
 
     def attacco_leggero(self, nemico):
         if self.stamina >= 5:
